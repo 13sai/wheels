@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>spslide</title>
+<meta charset="utf-8">
+<style>
+*{margin: 0;padding: 0;}
+.row{position: relative; margin: 20px auto; width: 1000px; overflow: hidden;}
+.row img{width: 240px; height: 360px; margin: 5px; float: left; position: relative; }
+</style>
+</head>
+<body>
+	<div class="row">
+		<!-- <div class="spslide-box"> -->
+			<img src="../images/1.jpg">
+			<img src="../images/2.jpg">
+			<img src="../images/3.jpg">
+			<img src="../images/4.jpg">
+			<img src="../images/5.jpg">
+			<img src="../images/6.jpg">
+			<img src="../images/7.jpg">
+			<img src="../images/8.jpg">
+		<!-- </div> -->
+	</div>
+<script src="jquery.js"></script>
+<script type="text/javascript" src="spslide.js"></script>
+<script>
+$(function(){
+	$('.row').spslide({speed:1000})
+})
+</script>
+</body>
+</html>

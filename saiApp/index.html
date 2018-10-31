@@ -1,0 +1,195 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>sai</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<link rel="stylesheet" href="css/amazeui.min.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+<script src="js/vue-resource.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/amazeui.min.js"></script>
+</head>
+<body>
+<div class="am-g">
+  <header data-am-widget="header" class="saiAppHead am-header am-header-default">
+  <div class="am-header-left am-header-nav">
+    <a data-am-offcanvas="{target: '#doc-oc-demo2', effect: 'push'}">
+    <i class="am-header-icon am-icon-bars"></i>
+    </a>
+  </div>
+  <h1 class="am-header-title">
+  <a href="#title-link" class="">
+            SAI
+  </a>
+  </h1>
+  <div class="am-header-right am-header-nav">
+    <a href="#right-link" class="">
+    </a>
+  </div>
+  </header>
+  <!-- 栏目切换 -->
+ 
+
+<!-- 侧边栏内容 -->
+<div id="doc-oc-demo2" class="saiAppOffcanvas am-offcanvas">
+  <div class="am-offcanvas-bar">
+    <div class="am-offcanvas-content">
+      <div class="saiAppOffcanvasUserIco">
+        <img src="/14893120571.jpg" alt="">
+      </div>
+      <div class="saiAppOffcanvasUserName">
+        13sai
+      </div>
+      <div class="saiAppOffcanvasInfo am-text-center">
+        忠于自己的认知，有趣地生活。
+      </div>
+    </div>
+  </div>
+</div>
+<div id="app">
+<router-view></router-view>
+</div>
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed" >
+    <a href="#top" title="回到顶部">
+        <span class="am-gotop-title">回到顶部</span>
+          <i class="am-gotop-icon am-icon-chevron-up"></i>
+    </a>
+</div>
+
+<script>
+Vue.component('items',{
+  props: ['titles'],
+  template: '<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right">'+
+              '<div class=" am-u-sm-8 am-list-main">'+
+                '<h3 class="am-list-item-hd"><router-link :to="{path: \'/detail\', query: {tid: titles.id}}" >{{ titles.title }}</router-link></h3>'+
+                '<div class="am-list-item-text">{{ titles.abstract }}</div>'+
+              '</div>'+
+              '<div class="am-u-sm-4 am-list-thumb">'+
+                '<router-link :to="{path: \'/detail\', query: {tid: titles.id}}" >'+
+                    '<img v-if="titles.pic" v-bind:src="\'http://www.13sai.com\'+titles.pic">'+
+                    '<img v-else src="http://www.13sai.com/ui/assets/i/f19.jpg">'+
+                '</router-link >'+
+              '</div>'+
+              '</li>'
+});
+const Home = {
+    template: '<div data-am-widget="list_news" class="saiAppNews am-list-news am-list-news-default" id="lists">'+
+                  '<div class="am-list-news-bd">'+
+                    '<ul class="am-list">'+
+                    '<items v-for="item in lists" v-bind:titles="item" v-bind:key="item.id">'+
+                    '</items>'+
+                    '</ul>'+
+                  '</div>'+
+                  '</div>'+
+                '</div>',
+    data: function(){
+        return {
+            lists: [],
+            apiUrl: "@",
+            pageUrl: "@",
+            iBtn: true,
+            iAgain: true,
+            nowPage: 1
+        }
+    },
+    created: function(){
+        this.getList();
+    },
+    methods: {   
+        getList: function() {
+            _this = this;
+            this.$http.get(this.apiUrl).then((response) => {
+                _this.lists = response.data.data;
+                }).catch(function(response) {         
+                })
+        },
+        iScroll: function(){
+            _this = this;
+            iH = document.body.scrollTop + window.screen.height - document.body.scrollHeight;
+            if(iH > -10 && _this.iBtn){
+                _this.iBtn = false;
+                _this.nowPage++;
+                _this.$http.get(_this.pageUrl,{params:{p:_this.nowPage}}).then((response) => {
+                        console.warn(response.data)
+                    if(response.data.status == 0){
+                        _this.lists = _this.lists.concat(response.data.data);
+                        _this.iBtn = true;
+                        console.warn(_this.lists)
+                    }else{
+                        var oDiv = document.createElement("div");
+                        oDiv.innerHTML='<button class="am-btn am-btn-default am-btn-block">我也是有底线的</button>';
+                        document.getElementById("lists").appendChild(oDiv); 
+                    }
+                }).catch(function(response) {         
+                })
+            }
+        }
+    },
+    mounted() {
+       window.addEventListener('scroll', this.iScroll)
+    },
+};
+const Detail = {
+    template:'<article class="am-article am-padding">'+
+              '<div class="am-article-hd">'+
+                '<h1 class="am-article-title">{{ titleD.title }}</h1>'+
+                '<p class="am-article-meta">{{ titleD.date }}</p>'+
+              '</div>'+
+              '<div class="am-article-bd">'+
+                '<p class="am-article-lead">{{ titleD.title }}</p>'+
+                '<div v-html="titleD.content">'+
+                '</div>'+
+              '</div>'+
+              '<div class="am-article-fd">'+
+                '<a href="#/" class="am-btn am-btn-secondary am-btn-block">返回列表</a>'+
+              '</div>'+
+            '</article>',
+    data: function(){
+        return {
+            par: {tid: this.$route.query.tid},
+            dUrl : '@',
+            titleD: ''
+        }
+    },
+    created: function(){
+        this.getDetail();
+    },
+    methods: {
+        getDetail: function(){
+            console.log(this.par.tid);
+            this.$http.get(this.dUrl,{params:this.par},{emulateJSON:true}).then((response) => {
+                    this.titleD = response.data.data;
+                }).catch(function(response) {         
+                })
+        }
+    }
+}
+const About = {
+    template:'<h3>这是第一个APP</h3>'
+}
+//配置路由
+const routes = [ 
+    {path:'/', component:Home},
+    {path:'/detail', component:Detail},
+    {path:'/about',component:About},
+]
+//生成路由实例
+const router = new VueRouter({
+    routes
+})
+var app = new Vue({
+    router,
+    el: '#app'
+})
+</script>
+
+</body>
+</html>

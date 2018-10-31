@@ -1,0 +1,17 @@
+{
+    "name": "13sai/IM",
+    "description": "IM powered by workerman",
+    "type": "project",
+    "homepage": "http://www.13sai.com",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0.3",
+        "workerman/gateway-worker-for-win": "^3.0"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}

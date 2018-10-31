@@ -1,0 +1,34 @@
+/* Write your styles */
+html,body {}
+ul,li,dl,dt,dd,i { list-style: none;font-style: normal; margin: 0; padding: 0;}
+/* saiapp */
+.saiAppHead { background: #3BB4F2;}
+.saiAppTab { background: #fff; margin: 0;}
+.saiAppTab .am-tabs-nav a { background: #fff;}
+.saiAppTab .am-tabs-nav>.am-active a {    color: #222;}
+.saiAppTab .am-tabs-nav { background: #d2cfd0;}
+.saiAppTab .am-tabs-nav a {color: #71757b;}
+.saiAppTab .am-tabs-nav li { height: 43px;}
+.saiAppTab .am-tabs-nav>.am-active:after { border: none;}
+.saiAppTab .am-tabs-nav>.am-active {     border-bottom: 4px solid #00c4cd;}
+.am-tabs-bd .saiAppTabPanel { padding: 0;} 
+.saiAppSlider {}
+.saiAppSlider .am-control-nav { bottom: 12px}
+.saiAppSlider .am-control-nav li a.am-active {background: #00c4cd;}
+.saiAppNews { margin: 0;}
+.saiAppNews li{ padding-left: 1rem; padding-right: 1rem;}
+.saiAppNews .am-list>li {    border-color: #eaedee;}
+
+.saiAppNews .am-list .am-list-item-hd a , .am-list-item-hd a:focus , .am-list-item-hd a:hover { font-size: 1.8rem; line-height: 2rem; }
+.saiAppNews .am-list .am-list-item-text {    -webkit-line-clamp: 1;max-height: 1.3em;}
+.saiAppNews .am-list-item-hd { padding-top: 3px;}
+
+
+.saiAppOffcanvas .am-offcanvas-bar { background: #292c34;}
+.saiAppOffcanvas .am-offcanvas-content { text-align: center;}
+.saiAppOffcanvas .saiAppOffcanvasUserIco { margin: 0 auto; text-align: center; margin-top: 20px; overflow: hidden; width: 140px; border-radius: 50%; margin-bottom: 20px;}
+.saiAppOffcanvas .saiAppOffcanvasUserIco img { width: 100%;}
+.saiAppOffcanvas .saiAppOffcanvasInfo {  font-size: 16px; color: #fff; padding-top: 18px;}
+.saiAppOffcanvas .saiAppOffcanvasUserName { border-radius: 30px; display: inline-block; color: #fff; padding: 2px 19px; background: #3BB4F2; font-size: 1.6rem; text-align: center; }
+.saiAppOffcanvas .am-container { padding: 10px; padding-top: 36px;}
+.saiAppOffcanvas .am-container .saiAppBtn { height: 26px; width: 100px; padding: 5px 0px; font-size: 14px;}

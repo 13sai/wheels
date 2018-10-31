@@ -1,0 +1,16 @@
+{
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "css/amazeui.min.css",
+      "css/app.css",
+      "js/vue.js",
+      "js/vue-router.js",
+      "js/vue-resource.js",
+      "js/jquery.min.js",
+      "js/amazeui.min.js"
+    ],
+    "refer": [],
+    "priority": 0
+  }
+}
